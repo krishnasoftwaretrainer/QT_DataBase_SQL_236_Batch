@@ -1,0 +1,48 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Wed Aug 12 10:08:47 2026
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect / as sysdba;
+Connected.
+SQL> create user qt236 identified by qt236;
+
+User created.
+
+SQL> connect qt236
+Enter password:
+ERROR:
+ORA-01045: user QT236 lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> connect / as sysdba;
+Connected.
+SQL> grant all privileges to qt236;
+
+Grant succeeded.
+
+SQL> connect qt236
+Enter password:
+Connected.
+SQL> show user;
+USER is "QT236"
+SQL> select * from tab;
+
+no rows selected
+
+SQL> connect / as sysdba;
+Connected.
+SQL> revoke all privileges from qt236;
+
+Revoke succeeded.
+
+SQL> connect qt236
+Enter password:
+ERROR:
+ORA-01045: user QT236 lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL>
+===============================================================
