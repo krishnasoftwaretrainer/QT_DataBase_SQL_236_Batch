@@ -46,3 +46,198 @@ ORA-01045: user QT236 lacks CREATE SESSION privilege; logon denied
 Warning: You are no longer connected to ORACLE.
 SQL>
 ===============================================================
+
+SQL*Plus: Release 11.2.0.2.0 Production on Thu Aug 13 09:35:45 2026
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect / as sysdba;
+Connected.
+SQL> drop user qt236;
+
+User dropped.
+
+SQL> create user qt236 identified by qt236;
+
+User created.
+
+SQL> connect qt236;
+Enter password:
+ERROR:
+ORA-01045: user QT236 lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> grant all privileges to qt236;
+SP2-0640: Not connected
+SQL> connect / as sysdba;
+Connected.
+SQL> grant all privileges to qt236;
+
+Grant succeeded.
+
+SQL> connect qt236;
+Enter password:
+Connected.
+SQL> connect / as sysdba;
+Connected.
+SQL> revoke all privileges from qt236;
+
+Revoke succeeded.
+
+SQL> connect qt236;
+Enter password:
+ERROR:
+ORA-01045: user QT236 lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> connect / as sysdba;
+Connected.
+SQL> grant all privileges to qt236;
+
+Grant succeeded.
+
+SQL> connect qt236;
+Enter password:
+Connected.
+SQL> select * from tab;
+
+no rows selected
+
+SQL> create table Sup(Sup_no varchar2(2),Sup_Name varchar2(10),Item_Supplied number(10),Item_Price number(2));
+
+Table created.
+
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+SUP                            TABLE
+
+SQL> desc sup;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUP_NO                                             VARCHAR2(2)
+ SUP_NAME                                           VARCHAR2(10)
+ ITEM_SUPPLIED                                      NUMBER(10)
+ ITEM_PRICE                                         NUMBER(2)
+
+SQL> select * from sup;
+
+no rows selected
+
+SQL> alter table sup add(City varchar2(15));
+
+Table altered.
+
+SQL> desc sup;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUP_NO                                             VARCHAR2(2)
+ SUP_NAME                                           VARCHAR2(10)
+ ITEM_SUPPLIED                                      NUMBER(10)
+ ITEM_PRICE                                         NUMBER(2)
+ CITY                                               VARCHAR2(15)
+
+SQL> alter table sup modify(iteam_supplied varchar2(12));
+alter table sup modify(iteam_supplied varchar2(12))
+                       *
+ERROR at line 1:
+ORA-00904: "ITEAM_SUPPLIED": invalid identifier
+
+
+SQL> alter table sup modify(item_supplied varchar2(12));
+
+Table altered.
+
+SQL> desc sup;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUP_NO                                             VARCHAR2(2)
+ SUP_NAME                                           VARCHAR2(10)
+ ITEM_SUPPLIED                                      VARCHAR2(12)
+ ITEM_PRICE                                         NUMBER(2)
+ CITY                                               VARCHAR2(15)
+
+SQL> alter table sup modify(item_price number(4));
+
+Table altered.
+
+SQL> desc sup;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUP_NO                                             VARCHAR2(2)
+ SUP_NAME                                           VARCHAR2(10)
+ ITEM_SUPPLIED                                      VARCHAR2(12)
+ ITEM_PRICE                                         NUMBER(4)
+ CITY                                               VARCHAR2(15)
+
+SQL> alter table sup add(fefjew varchar2(15));
+
+Table altered.
+
+SQL> desc sup;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUP_NO                                             VARCHAR2(2)
+ SUP_NAME                                           VARCHAR2(10)
+ ITEM_SUPPLIED                                      VARCHAR2(12)
+ ITEM_PRICE                                         NUMBER(4)
+ CITY                                               VARCHAR2(15)
+ FEFJEW                                             VARCHAR2(15)
+
+SQL> alter table sup rename column fefjew to product;
+
+Table altered.
+
+SQL> desc sup;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUP_NO                                             VARCHAR2(2)
+ SUP_NAME                                           VARCHAR2(10)
+ ITEM_SUPPLIED                                      VARCHAR2(12)
+ ITEM_PRICE                                         NUMBER(4)
+ CITY                                               VARCHAR2(15)
+ PRODUCT                                            VARCHAR2(15)
+
+SQL> alter table sup drop column product;
+
+Table altered.
+
+SQL> desc sup;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUP_NO                                             VARCHAR2(2)
+ SUP_NAME                                           VARCHAR2(10)
+ ITEM_SUPPLIED                                      VARCHAR2(12)
+ ITEM_PRICE                                         NUMBER(4)
+ CITY                                               VARCHAR2(15)
+
+SQL> rename table sup to Supplier;
+rename table sup to Supplier
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> rename sup to Supplier;
+
+Table renamed.
+
+SQL> desc sup;
+ERROR:
+ORA-04043: object sup does not exist
+
+
+SQL> desc suppliER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUP_NO                                             VARCHAR2(2)
+ SUP_NAME                                           VARCHAR2(10)
+ ITEM_SUPPLIED                                      VARCHAR2(12)
+ ITEM_PRICE                                         NUMBER(4)
+ CITY                                               VARCHAR2(15)
+
+SQL>

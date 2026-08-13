@@ -1,0 +1,127 @@
+Data Base:
+----------
+
+Software Testing:
+--------------
+STE:MTE or ATE 
+
+Quality or Defect App:
+
+Goal:To delivery Quality app to Client or Market. 
+
+Manual Testing:SDLC STLC BLC
+Database:
+API 
+Automation:PlayWright or Selenium
+
+To store data/information in Memory.
+
+Database Developer:
+
+Web App:URL[www.amazon.in]->Link 
+
+FrontEnd[GUI] + BackEnd = App 
+
+GUI:Images Text Video Audio AM GP etc..
+FrontEnd Developers:HTML CSS JS BS RJS Anguler etc...
+
+BackEnd:Functonal[Logical/Coding]+DataBase
+Programming Languages:C C++ Java Python .net TS JS Ruby etc...
+2+3=5
+
+DataBase:Store/Retrive
+Database Developers:
+Fulstack Developers:
+
+Client-Server:
+-------------
+Request and Response
+
+3Types of App:
+----------
+1.Web App:URL Browser:GC MFF ME etc.. OS:Windows or Mac  
+
+2.Desktop App:
+3.Mobile App 
+
+Whatsup:Web Desktop Mobile
+
+OracleDB[SQL]:Queries
+
+Basic or Theory Concepts
+Basic Queries[DDL DML DCL TCL]
+Advanced Queries
+
+Krishna 
+
+
+DataBase:
+--------
+CRUD:Create Insert Retrive Update Delete
+
+Softwares: DBMS[OracleDB,MYSQL,SQL Server]
+
+OracleDB:SQL:Queries:Question
+
+OracleDB Download Link: https://www.oracle.com/database/technologies/xe-prior-release-downloads.html
+
+
+DataBase:DBMS:OracleDB:
+
+Download and Install OracleDB:
+-----------------
+Free:11g 21c 23c
+
+
+Oracle DBA: SYSDBA 
+Oracle Users/Developers/Testers:
+
+Project DB:UN PWD 
+
+DCL Commands:
+Create a User/DataBase
+Grant Privileges 
+Revoke Privileges
+
+DCL:Data Control Language Commands
+SYSDBA:
+Create USer 
+Grant Privileges:Granting or providing privileges to User or database.
+Syntax:grant all privileges to username;
+Example:grant all privileges to qt236;
+
+Revoke Privileges:Revoke or Cancel or remove all privileges from username.
+
+Syntax:revoke all privileges from username;
+Example:revoke all privileges from qt236;
+
+DDL:Data Defination Language
+Working structure of database table.
+1.Create:Using to create the structure(empty) of new database table.
+
+Syntax:create table tablename(Column1 datatype(size),Column2 datatype(size),...);
+
+2.Alter:Alter commands using to add new column,modify exisiting column,rename exisiting column name and drop exisiting column.
+
+add  new column for exisiting database table.
+Syntax:alter table tablename add(newcolumnname datatype(size));
+
+modify datatype or size
+Syntax: alter table tablename modify();
+
+rename
+
+drop
+
+3.Rename:Rename command using to rename the tablename.
+
+4.Truncate:
+
+5.Drop:
+
+
+DML:
+
+TCL:
+
+DCL:grant and revoke
