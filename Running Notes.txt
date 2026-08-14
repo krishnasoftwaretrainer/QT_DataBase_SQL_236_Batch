@@ -119,9 +119,38 @@ drop
 
 5.Drop:
 
+DML:Data Manipulation Language
+---------
+Insert:Store your data into database table.
+Syntax:insert into tablename values(value1,value2,.....);
+Ex:  insert into supplier values('S2','Kiran','Processor',8000,'Delhi');
 
-DML:
+Specfic Values Insertion:
+Syntax:insert into tablename(Column1,Column2,...) values(Value1,Value2,...);
+
+
+Select:To view the inserted data.
+Syntax:select * from tablename;
+
+
+Update
+
+Delete
+
+
+
 
 TCL:
 
 DCL:grant and revoke
+
+Assignment:
+---------
+Create student table.
+[htno,sname,sub1,sub2,sub3,sub4]
+Insert any 10 Records.
+[101,'Krishna',99,88,57,65]
+
+Alter Query:
+add two new columns:totalmarks,percentage.
+select * from student;e

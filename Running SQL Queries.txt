@@ -241,3 +241,87 @@ SQL> desc suppliER;
  CITY                                               VARCHAR2(15)
 
 SQL>
+=================================
+
+SQL> connect qt236
+Enter password:
+Connected.
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+SUPPLIER                       TABLE
+
+SQL> select * from supplier;
+
+no rows selected
+
+SQL> desc supplier;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUP_NO                                             VARCHAR2(2)
+ SUP_NAME                                           VARCHAR2(10)
+ ITEM_SUPPLIED                                      VARCHAR2(12)
+ ITEM_PRICE                                         NUMBER(4)
+ CITY                                               VARCHAR2(15)
+
+SQL> insert into supplier values('S1','Suresh','Keyboard',400,'Hyderabad');
+
+1 row created.
+
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Keyboard            400 Hyderabad
+
+SQL> select * from student;
+select * from student
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> insert into supplier values('S2,'Kiran','Processor',8000,'Delhi');
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into supplier values('S2','Kiran','Processor',8000,'Delhi');
+
+1 row created.
+
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Keyboard            400 Hyderabad
+S2 Kiran      Processor          8000 Delhi
+
+SQL> select sup_no,sup_name,ITEM_PRICE from supplier;
+
+SU SUP_NAME   ITEM_PRICE
+-- ---------- ----------
+S1 Suresh            400
+S2 Kiran            8000
+
+SQL> insert into supplier values('S3','Mohan',350);
+insert into supplier values('S3','Mohan',350)
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into supplier(sup_no,sup_name,item_price) values('S3','Mohan',350);
+
+1 row created.
+
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Keyboard            400 Hyderabad
+S2 Kiran      Processor          8000 Delhi
+S3 Mohan                          350
+
+SQL>
