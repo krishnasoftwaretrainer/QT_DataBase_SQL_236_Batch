@@ -325,3 +325,450 @@ S2 Kiran      Processor          8000 Delhi
 S3 Mohan                          350
 
 SQL>
+==================================
+
+SQL*Plus: Release 11.2.0.2.0 Production on Mon Aug 17 09:40:21 2026
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect db236
+Enter password:
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+SQL> connect qt236
+Enter password:
+Connected.
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+SUPPLIER                       TABLE
+
+SQL> desc supplier;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUP_NO                                             VARCHAR2(2)
+ SUP_NAME                                           VARCHAR2(10)
+ ITEM_SUPPLIED                                      VARCHAR2(12)
+ ITEM_PRICE                                         NUMBER(4)
+ CITY                                               VARCHAR2(15)
+
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Keyboard            400 Hyderabad
+S2 Kiran      Processor          8000 Delhi
+S3 Mohan                          350
+
+SQL> insert into supplier values('S4','Ramesh','Bangalore');
+insert into supplier values('S4','Ramesh','Bangalore')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into supplier(sup_no,sup_name,city) values('S4','Ramesh','Bangalore');
+
+1 row created.
+
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Keyboard            400 Hyderabad
+S2 Kiran      Processor          8000 Delhi
+S3 Mohan                          350
+S4 Ramesh                             Bangalore
+
+SQL> insert into supplier values('&sup_no','&sup_name','&ITEM_SUPPLIED',&ITEM_PRICE,'&city');
+Enter value for sup_no: 'S5'
+Enter value for sup_name: 'Manish'
+Enter value for item_supplied: 'Printer'
+Enter value for item_price: 6000
+Enter value for city: 'Mumbai'
+old   1: insert into supplier values('&sup_no','&sup_name','&ITEM_SUPPLIED',&ITEM_PRICE,'&city')
+new   1: insert into supplier values(''S5'',''Manish'',''Printer'',6000,''Mumbai'')
+insert into supplier values(''S5'',''Manish'',''Printer'',6000,''Mumbai'')
+                              *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> insert into supplier values('&sup_no','&sup_name','&ITEM_SUPPLIED',&ITEM_PRICE,'&city');
+Enter value for sup_no: 'S5'
+Enter value for sup_name: 'Manish'
+Enter value for item_supplied: 'Printer'
+Enter value for item_price: 6000
+Enter value for city: 'Mumbai'
+old   1: insert into supplier values('&sup_no','&sup_name','&ITEM_SUPPLIED',&ITEM_PRICE,'&city')
+new   1: insert into supplier values(''S5'',''Manish'',''Printer'',6000,''Mumbai'')
+insert into supplier values(''S5'',''Manish'',''Printer'',6000,''Mumbai'')
+                              *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> insert into supplier values('&sup_no','&sup_name','&ITEM_SUPPLIED',&ITEM_PRICE,'&city');
+Enter value for sup_no: 'S5'
+Enter value for sup_name: 'Manish'
+Enter value for item_supplied: 'Printer'
+Enter value for item_price: 6000
+Enter value for city: 'Mumbai'
+old   1: insert into supplier values('&sup_no','&sup_name','&ITEM_SUPPLIED',&ITEM_PRICE,'&city')
+new   1: insert into supplier values(''S5'',''Manish'',''Printer'',6000,''Mumbai'')
+insert into supplier values(''S5'',''Manish'',''Printer'',6000,''Mumbai'')
+                              *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> insert into supplier values('&sup_no','&sup_name','&ITEM_SUPPLIED',&ITEM_PRICE,'&city');
+Enter value for sup_no: 'S5'
+Enter value for sup_name: 'Manish'
+Enter value for item_supplied: 'Printer'
+Enter value for item_price: 6000
+Enter value for city: 'Mumbai'
+old   1: insert into supplier values('&sup_no','&sup_name','&ITEM_SUPPLIED',&ITEM_PRICE,'&city')
+new   1: insert into supplier values(''S5'',''Manish'',''Printer'',6000,''Mumbai'')
+insert into supplier values(''S5'',''Manish'',''Printer'',6000,''Mumbai'')
+                              *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> insert into supplier values('&sup_no','&sup_name','&ITEM_SUPPLIED',&ITEM_PRICE,'&city');
+Enter value for sup_no: S5
+Enter value for sup_name: Manish
+Enter value for item_supplied: Printer
+Enter value for item_price: 6000
+Enter value for city: Mumbai
+old   1: insert into supplier values('&sup_no','&sup_name','&ITEM_SUPPLIED',&ITEM_PRICE,'&city')
+new   1: insert into supplier values('S5','Manish','Printer',6000,'Mumbai')
+
+1 row created.
+
+SQL> /
+Enter value for sup_no: S6
+Enter value for sup_name: Srikanth
+Enter value for item_supplied: Processor
+Enter value for item_price: 8500
+Enter value for city: Chennai
+old   1: insert into supplier values('&sup_no','&sup_name','&ITEM_SUPPLIED',&ITEM_PRICE,'&city')
+new   1: insert into supplier values('S6','Srikanth','Processor',8500,'Chennai')
+
+1 row created.
+
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Keyboard            400 Hyderabad
+S2 Kiran      Processor          8000 Delhi
+S3 Mohan                          350
+S4 Ramesh                             Bangalore
+S5 Manish     Printer            6000 Mumbai
+S6 Srikanth   Processor          8500 Chennai
+
+6 rows selected.
+
+SQL> insert into supplier values('&&sup_no','&&sup_name','&&ITEM_SUPPLIED',&&ITEM_PRICE,'&&city');
+Enter value for sup_no: S7
+Enter value for sup_name: krishna
+Enter value for item_supplied: Laptop
+Enter value for item_price: 8888
+Enter value for city: Hyd
+old   1: insert into supplier values('&&sup_no','&&sup_name','&&ITEM_SUPPLIED',&&ITEM_PRICE,'&&city')
+new   1: insert into supplier values('S7','krishna','Laptop',8888,'Hyd')
+
+1 row created.
+
+SQL> //
+old   1: insert into supplier values('&&sup_no','&&sup_name','&&ITEM_SUPPLIED',&&ITEM_PRICE,'&&city')
+new   1: insert into supplier values('S7','krishna','Laptop',8888,'Hyd')
+
+1 row created.
+
+SQL> //
+old   1: insert into supplier values('&&sup_no','&&sup_name','&&ITEM_SUPPLIED',&&ITEM_PRICE,'&&city')
+new   1: insert into supplier values('S7','krishna','Laptop',8888,'Hyd')
+
+1 row created.
+
+SQL> //
+old   1: insert into supplier values('&&sup_no','&&sup_name','&&ITEM_SUPPLIED',&&ITEM_PRICE,'&&city')
+new   1: insert into supplier values('S7','krishna','Laptop',8888,'Hyd')
+
+1 row created.
+
+SQL> //
+old   1: insert into supplier values('&&sup_no','&&sup_name','&&ITEM_SUPPLIED',&&ITEM_PRICE,'&&city')
+new   1: insert into supplier values('S7','krishna','Laptop',8888,'Hyd')
+
+1 row created.
+
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Keyboard            400 Hyderabad
+S2 Kiran      Processor          8000 Delhi
+S3 Mohan                          350
+S4 Ramesh                             Bangalore
+S5 Manish     Printer            6000 Mumbai
+S6 Srikanth   Processor          8500 Chennai
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+
+11 rows selected.
+
+SQL>
+SQL> commit;
+
+Commit complete.
+
+SQL> update supplier set ITEM_SUPPLIED='Mouse';
+
+11 rows updated.
+
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Mouse               400 Hyderabad
+S2 Kiran      Mouse              8000 Delhi
+S3 Mohan      Mouse               350
+S4 Ramesh     Mouse                   Bangalore
+S5 Manish     Mouse              6000 Mumbai
+S6 Srikanth   Mouse              8500 Chennai
+S7 krishna    Mouse              8888 Hyd
+S7 krishna    Mouse              8888 Hyd
+S7 krishna    Mouse              8888 Hyd
+S7 krishna    Mouse              8888 Hyd
+S7 krishna    Mouse              8888 Hyd
+
+11 rows selected.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Keyboard            400 Hyderabad
+S2 Kiran      Processor          8000 Delhi
+S3 Mohan                          350
+S4 Ramesh                             Bangalore
+S5 Manish     Printer            6000 Mumbai
+S6 Srikanth   Processor          8500 Chennai
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+
+11 rows selected.
+
+ QL> update supplier set ITEM_SUPPLIED='Mouse' where sup_no='S3';
+
+1 row updated.
+
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Keyboard            400 Hyderabad
+S2 Kiran      Processor          8000 Delhi
+S3 Mohan      Mouse               350
+S4 Ramesh                             Bangalore
+S5 Manish     Printer            6000 Mumbai
+S6 Srikanth   Processor          8500 Chennai
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+
+11 rows selected.
+
+SQL> update supplier set city='Delhi' where sup_no='S3';
+
+1 row updated.
+
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Keyboard            400 Hyderabad
+S2 Kiran      Processor          8000 Delhi
+S3 Mohan      Mouse               350 Delhi
+S4 Ramesh                             Bangalore
+S5 Manish     Printer            6000 Mumbai
+S6 Srikanth   Processor          8500 Chennai
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+
+11 rows selected.
+
+SQL> update supplier set ITEM_SUPPLIED='Processor' and ITEM_PRICE=9000 where sup_no='S4';
+update supplier set ITEM_SUPPLIED='Processor' and ITEM_PRICE=9000 where sup_no='S4'
+                                              *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> update supplier set ITEM_SUPPLIED='Processor' && ITEM_PRICE=9000 where sup_no='S4';
+old   1: update supplier set ITEM_SUPPLIED='Processor' && ITEM_PRICE=9000 where sup_no='S4'
+new   1: update supplier set ITEM_SUPPLIED='Processor' 8888=9000 where sup_no='S4'
+update supplier set ITEM_SUPPLIED='Processor' 8888=9000 where sup_no='S4'
+                                              *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> update supplier set ITEM_SUPPLIED='Processor' and ITEM_PRICE=9000 where sup_no='S4';
+update supplier set ITEM_SUPPLIED='Processor' and ITEM_PRICE=9000 where sup_no='S4'
+                                              *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> update supplier set ITEM_SUPPLIED='Processor',ITEM_PRICE=9000 where sup_no='S4';
+
+1 row updated.
+
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Keyboard            400 Hyderabad
+S2 Kiran      Processor          8000 Delhi
+S3 Mohan      Mouse               350 Delhi
+S4 Ramesh     Processor          9000 Bangalore
+S5 Manish     Printer            6000 Mumbai
+S6 Srikanth   Processor          8500 Chennai
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+
+11 rows selected.
+
+SQL> select * from supplier where ITEM_PRICE>=5000;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S2 Kiran      Processor          8000 Delhi
+S4 Ramesh     Processor          9000 Bangalore
+S5 Manish     Printer            6000 Mumbai
+S6 Srikanth   Processor          8500 Chennai
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+
+9 rows selected.
+
+SQL> select * from supplier where ITEM_PRICE>=5000 and ITEM_SUPPLIED='Processor';
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S2 Kiran      Processor          8000 Delhi
+S4 Ramesh     Processor          9000 Bangalore
+S6 Srikanth   Processor          8500 Chennai
+
+SQL> select sup_no,sup_name,city from supplier where ITEM_PRICE>=5000 and ITEM_SUPPLIED='Processor';
+
+SU SUP_NAME   CITY
+-- ---------- ---------------
+S2 Kiran      Delhi
+S4 Ramesh     Bangalore
+S6 Srikanth   Chennai
+
+SQL>
+SQL> commit;
+
+Commit complete.
+
+SQL> delete supplier;
+
+11 rows deleted.
+
+SQL> select * from supplier;
+
+no rows selected
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL>
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Keyboard            400 Hyderabad
+S2 Kiran      Processor          8000 Delhi
+S3 Mohan      Mouse               350 Delhi
+S4 Ramesh     Processor          9000 Bangalore
+S5 Manish     Printer            6000 Mumbai
+S6 Srikanth   Processor          8500 Chennai
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+S7 krishna    Laptop             8888 Hyd
+
+11 rows selected.
+
+SQL> delete supplier where sup_no='S7';
+
+5 rows deleted.
+
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Keyboard            400 Hyderabad
+S2 Kiran      Processor          8000 Delhi
+S3 Mohan      Mouse               350 Delhi
+S4 Ramesh     Processor          9000 Bangalore
+S5 Manish     Printer            6000 Mumbai
+S6 Srikanth   Processor          8500 Chennai
+
+6 rows selected.
+
+SQL> delete supplier where sup_no='S7';
+
+0 rows deleted.
+
+SQL> select * from supplier;
+
+SU SUP_NAME   ITEM_SUPPLIE ITEM_PRICE CITY
+-- ---------- ------------ ---------- ---------------
+S1 Suresh     Keyboard            400 Hyderabad
+S2 Kiran      Processor          8000 Delhi
+S3 Mohan      Mouse               350 Delhi
+S4 Ramesh     Processor          9000 Bangalore
+S5 Manish     Printer            6000 Mumbai
+S6 Srikanth   Processor          8500 Chennai
+
+6 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL>
