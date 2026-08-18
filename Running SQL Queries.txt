@@ -772,3 +772,284 @@ SQL> commit;
 Commit complete.
 
 SQL>
+==============================
+
+SQL*Plus: Release 11.2.0.2.0 Production on Tue Aug 18 10:04:57 2026
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect qt236
+Enter password:
+Connected.
+SQL> create table stu1(htno number(3),sname varchar2(20),dob date,gender char(1),sub1 number(3),sub2 number(3),sub3 number(3),average number(5,2));
+
+Table created.
+
+SQL> desc stu1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ HTNO                                               NUMBER(3)
+ SNAME                                              VARCHAR2(20)
+ DOB                                                DATE
+ GENDER                                             CHAR(1)
+ SUB1                                               NUMBER(3)
+ SUB2                                               NUMBER(3)
+ SUB3                                               NUMBER(3)
+ AVERAGE                                            NUMBER(5,2)
+
+SQL> alter table drop column average;
+alter table drop column average
+            *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> alter table stu1 drop column average;
+
+Table altered.
+
+SQL> desc stu1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ HTNO                                               NUMBER(3)
+ SNAME                                              VARCHAR2(20)
+ DOB                                                DATE
+ GENDER                                             CHAR(1)
+ SUB1                                               NUMBER(3)
+ SUB2                                               NUMBER(3)
+ SUB3                                               NUMBER(3)
+
+SQL> insert into stu1 values(101,'Krishna','10/feb/99','M',99,88,77);
+
+1 row created.
+
+SQL> select * from stu1;
+
+      HTNO SNAME                DOB       G       SUB1       SUB2 SUB3
+---------- -------------------- --------- - ---------- ---------- ----------
+       101 Krishna              10-FEB-99 M         99         88   77
+
+SQL> insert into stu1 values('102','Krishna','10/feb/99','M',99,88,77);
+
+1 row created.
+
+SQL> insert into stu1 values('hgt','Krishna','10/feb/99','M',99,88,77);
+insert into stu1 values('hgt','Krishna','10/feb/99','M',99,88,77)
+                        *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> insert into stu1 values(103,'fehf$%$%534DGDFG','22/march/1997','Male',99,88,77);
+insert into stu1 values(103,'fehf$%$%534DGDFG','22/march/1997','Male',99,88,77)
+                                                               *
+ERROR at line 1:
+ORA-12899: value too large for column "QT236"."STU1"."GENDER" (actual: 4,
+maximum: 1)
+
+
+SQL> insert into stu1 values(103,'fehf$%$%534DGDFG','22/march/1997','M',99,89,79);
+
+1 row created.
+
+SQL> select * from stu1;
+
+      HTNO SNAME                DOB       G       SUB1       SUB2    SUB3
+---------- -------------------- --------- - ---------- ---------- ----------
+       101 Krishna              10-FEB-99 M         99         88      77
+       102 Krishna              10-FEB-99 M         99         88      77
+       103 fehf$%$%534DGDFG     22-MAR-97 M         99         89      79
+
+SQL> insert into stu1 values(103,'fehf$%$%534DGDFG','22/ramesh/1997','Male',99,88,77);
+insert into stu1 values(103,'fehf$%$%534DGDFG','22/ramesh/1997','Male',99,88,77)
+                                               *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> insert into stu1 values(104,'12345','22/december/1997','Male',99,88,77);
+insert into stu1 values(104,'12345','22/december/1997','Male',99,88,77)
+                                                       *
+ERROR at line 1:
+ORA-12899: value too large for column "QT236"."STU1"."GENDER" (actual: 4,
+maximum: 1)
+
+
+SQL> insert into stu1 values(104,'12345','22/december/1997','M',99,88,77);
+
+1 row created.
+
+SQL> select * from stu1;
+
+      HTNO SNAME                DOB       G       SUB1       SUB2    SUB3
+---------- -------------------- --------- - ---------- ---------- ----------
+       101 Krishna              10-FEB-99 M         99         88      77
+       102 Krishna              10-FEB-99 M         99         88      77
+       103 fehf$%$%534DGDFG     22-MAR-97 M         99         89      79
+       104 12345                22-DEC-97 M         99         88      77
+
+SQL> create table test1(sid number(3),percentage number(5,2));
+
+Table created.
+
+SQL> insert into test1 values(111,999.99);
+
+1 row created.
+
+SQL> select * from test1;
+
+       SID PERCENTAGE
+---------- ----------
+       111     999.99
+
+SQL> insert into test1 values(111,999.999);
+insert into test1 values(111,999.999)
+                             *
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column
+
+
+SQL> insert into test1 values(111,99.999);
+
+1 row created.
+
+SQL> select * from test1;
+
+       SID PERCENTAGE
+---------- ----------
+       111     999.99
+       111        100
+
+SQL> insert into test1 values(112,9999.99);
+insert into test1 values(112,9999.99)
+                             *
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column
+
+
+SQL> insert into test1 values(112,999.999);
+insert into test1 values(112,999.999)
+                             *
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column
+
+
+SQL> insert into test1 values(112,9999.99);
+insert into test1 values(112,9999.99)
+                             *
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column
+
+
+SQL> insert into test1 values(112,99.9);
+
+1 row created.
+
+SQL> insert into test1(sid) values(115);
+
+1 row created.
+
+SQL> select * from test1;
+
+       SID PERCENTAGE
+---------- ----------
+       111     999.99
+       111        100
+       112       99.9
+       115
+
+SQL> create table stu2(sid number(3) primary key,sname varchar2(20) not null,mobile number(5) unique),marks number(3));
+create table stu2(sid number(3) primary key,sname varchar2(20) not null,mobile number(5) unique),marks number(3))
+                                                                                                *
+ERROR at line 1:
+ORA-00922: missing or invalid option
+
+
+SQL> create table stu2(sid number(3) primary key,sname varchar2(20) not null,mobile number(5) unique,marks number(3));
+
+Table created.
+
+SQL> desc stu2;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                       NOT NULL NUMBER(3)
+ SNAME                                     NOT NULL VARCHAR2(20)
+ MOBILE                                             NUMBER(5)
+ MARKS                                              NUMBER(3)
+
+SQL> insert into stu2 values(101,'Krishna',12345,99);
+
+1 row created.
+
+SQL> select * from stu2;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+
+SQL> insert into stu2 values(101,'Krishna',12345,99);
+insert into stu2 values(101,'Krishna',12345,99)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (QT236.SYS_C007077) violated
+
+
+SQL> insert into stu2 values(101,'Ramesh',12345,99);
+insert into stu2 values(101,'Ramesh',12345,99)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (QT236.SYS_C007077) violated
+
+
+SQL> insert into stu2 values(102,'Ramesh',12345,99);
+insert into stu2 values(102,'Ramesh',12345,99)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (QT236.SYS_C007078) violated
+
+
+SQL> insert into stu2 values(102,'Ramesh',12346,99);
+
+1 row created.
+
+SQL> select * from stu2;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       102 Ramesh                    12346         99
+
+SQL> insert into stu2 values(103,'Ramesh',12345,98);
+insert into stu2 values(103,'Ramesh',12345,98)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (QT236.SYS_C007078) violated
+
+
+SQL> insert into stu2(sname,mobile,marks) values('Ramesh',12365,98);
+insert into stu2(sname,mobile,marks) values('Ramesh',12365,98)
+*
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("QT236"."STU2"."SID")
+
+
+SQL> insert into stu2(sid,sname,marks) values(106,'Ramesh',98);
+
+1 row created.
+
+SQL> select * from stu2;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       102 Ramesh                    12346         99
+       106 Ramesh                                  98
+
+SQL> insert into stu2(sid,mobile,marks) values(106,1111,98);
+insert into stu2(sid,mobile,marks) values(106,1111,98)
+*
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("QT236"."STU2"."SNAME")
+
+
+SQL>

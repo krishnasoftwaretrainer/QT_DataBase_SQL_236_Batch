@@ -65,7 +65,173 @@ OracleDB:SQL:Queries:Question
 
 OracleDB Download Link: https://www.oracle.com/database/technologies/xe-prior-release-downloads.html
 
+sysdba 
+sysdba 
 
 DataBase:DBMS:OracleDB:
 
+Download and Install OracleDB:
+-----------------
+Free:11g 21c 23c
+
+
+Oracle DBA: SYSDBA 
+Oracle Users/Developers/Testers:
+
+Project DB:UN PWD 
+
+DCL Commands:
+Create a User/DataBase
+Grant Privileges 
+Revoke Privileges
+
+DCL:Data Control Language Commands
+SYSDBA:
+Create USer 
+Grant Privileges:Granting or providing privileges to User or database.
+Syntax:grant all privileges to username;
+Example:grant all privileges to qt236;
+
+Revoke Privileges:Revoke or Cancel or remove all privileges from username.
+
+Syntax:revoke all privileges from username;
+Example:revoke all privileges from qt236;
+
+DDL:Data Defination Language
+Working structure of database table.
+1.Create:Using to create the structure(empty) of new database table.
+
+Syntax:create table tablename(Column1 datatype(size),Column2 datatype(size),...);
+
+2.Alter:Alter commands using to add new column,modify exisiting column,rename exisiting column name and drop exisiting column.
+
+add  new column for exisiting database table.
+Syntax:alter table tablename add(newcolumnname datatype(size));
+
+modify datatype or size
+Syntax: alter table tablename modify();
+
+rename
+
+drop
+
+3.Rename:Rename command using to rename the tablename.
+
+4.Truncate:
+
+5.Drop:
+
+DML:Data Manipulation Language
+---------
+Insert:Store your data into database table.
+Syntax:insert into tablename values(value1,value2,.....);
+Ex:  insert into supplier values('S2','Kiran','Processor',8000,'Delhi');
+
+Specfic Values Insertion:
+Syntax:insert into tablename(Column1,Column2,...) values(Value1,Value2,...);
+
+
+Select:To view the inserted data.
+Syntax:select * from tablename;
+
+
+Update
+
+Delete
+
+
+
+
+TCL:
+
+DCL:grant and revoke
+
+Assignment:
+---------
+Create student table.
+[htno,sname,sub1,sub2,sub3,sub4]
+Insert any 10 Records.
+[101,'Krishna',99,88,57,65]
+
+Alter Query:
+add two new columns:totalmarks,percentage.
+select * from student;
+
+update: update tablename set totalmarks=sub1+sub2+sub3+sub4 where htno=101;
+
+Emp:eid ename 
+
+DDL:
+Create
+Alter:add modify rename drop
+Rename
+
+Truncate
+Drop
+
+DML:
+Insert:4Types:All Particuler Continues Same
+
+Update:All Rows or Specfic Rows  
+Syntax: update tablename set columnname=value;
+
+Select:Where 
+
+Delete:All Records or Specfic Record
+delete tablename where;
+
+DCL:DBA 
+Grant
+Revoke 
+
+TCL:
+Commit
+RollBack
+SavePoint
+
+01/jan/2001
+
+01/jan/01
+Date/Month/Year
+DD/MON/DD 
+
 Datatypes:VarChar2 Number Date 
+
+int a="dfgr"; Validation
+float b=99.99f;
+
+Htno[Number]:101 102 Krishna Male 55.55
+
+Character or Characters:String:" "
+Ex:'M' 'F' 'Krishna' 'MCA' 'Hyd' 'Krish123@gmail.com'
+
+100bytes:70bytes
+sname char[30]:30bytes :Suresh:6bytes:24
+
+Rs:100:10
+Rs:1k:100
+Fixed Size:pincode char[6]
+			course char[10]
+
+100bytes:70bytes+24=94
+sname varchar[30]:30bytes: Murali:6bytes 
+Rs:100:10 Rs:90  2k bytes:1k 1k 
+
+varchar2[10]:10bytes: 4k bytes:1k 3k 
+
+number:
+Plain Numbers:56587:number[5]
+
+Point Values:14.456:number(P,S) number(8,3)
+P-S=5-3=2
+
+Date:DOB DOJ :date '12/aug/99'
+TimeStamp:'12/aug/99 10:01:22 am'
+
+Constraints:
+-----------Rule or Validation
+Primary Key:Should not:Null and Duplicate 
+
+Not Null: Null x: Duplicate
+
+Unique:Duplicate x: Null 
