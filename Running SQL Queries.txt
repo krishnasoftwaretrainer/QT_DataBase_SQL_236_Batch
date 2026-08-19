@@ -1053,3 +1053,182 @@ ORA-01400: cannot insert NULL into ("QT236"."STU2"."SNAME")
 
 
 SQL>
+=========================
+
+SQL*Plus: Release 11.2.0.2.0 Production on Wed Aug 19 09:43:05 2026
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect qt236
+Enter password:
+Connected.
+SQL> desc test2;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                             NUMBER(30)
+ DOJ                                            TIMESTAMP(6)
+
+SQL> select * from test2;
+
+no rows selected
+
+SQL> select * from test2;
+
+        ID
+----------
+DOJ
+---------------------------------------------------------------------------
+        11
+19-AUG-26 09.48.22.000000 AM
+
+
+SQL> select * from test2;
+
+        ID
+----------
+DOJ
+---------------------------------------------------------------------------
+        11
+19-AUG-26 09.48.22.000000 AM
+
+
+SQL> select * from test2;
+
+        ID
+----------
+DOJ
+---------------------------------------------------------------------------
+        11
+19-AUG-26 09.48.22.000000 AM
+
+        12
+18-AUG-26 09.58.22.000000 AM
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> set linesize 200;
+SQL> select * from test2;
+
+        ID DOJ
+---------- ---------------------------------------------------------------------------
+        11 19-AUG-26 09.48.22.000000 AM
+        12 18-AUG-26 09.58.22.000000 AM
+
+SQL> commit;
+
+Commit complete.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from test2;
+
+        ID DOJ
+---------- ---------------------------------------------------------------------------
+        11 19-AUG-26 09.48.22.000000 AM
+        12 18-AUG-26 09.58.22.000000 AM
+
+SQL> insert into test2 values(13,'17-AUG-26 09.58.22.000000 AM')
+  2  ;
+
+1 row created.
+
+SQL> select * from test2;
+
+        ID DOJ
+---------- ---------------------------------------------------------------------------
+        11 19-AUG-26 09.48.22.000000 AM
+        12 18-AUG-26 09.58.22.000000 AM
+        13 17-AUG-26 09.58.22.000000 AM
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from test2;
+
+        ID DOJ
+---------- ---------------------------------------------------------------------------
+        11 19-AUG-26 09.48.22.000000 AM
+        12 18-AUG-26 09.58.22.000000 AM
+
+SQL> insert into test2 values(13,'17-AUG-26 09.58.22.000000 AM')
+  2  ;
+
+1 row created.
+
+SQL> select * from test2;
+
+        ID DOJ
+---------- ---------------------------------------------------------------------------
+        11 19-AUG-26 09.48.22.000000 AM
+        12 18-AUG-26 09.58.22.000000 AM
+        13 17-AUG-26 09.58.22.000000 AM
+
+SQL> commit;
+
+Commit complete.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from test2;
+
+        ID DOJ
+---------- ---------------------------------------------------------------------------
+        11 19-AUG-26 09.48.22.000000 AM
+        12 18-AUG-26 09.58.22.000000 AM
+        13 17-AUG-26 09.58.22.000000 AM
+
+SQL> delete test2;
+
+3 rows deleted.
+
+SQL> select * from test2;
+
+no rows selected
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from test2;
+
+        ID DOJ
+---------- ---------------------------------------------------------------------------
+        11 19-AUG-26 09.48.22.000000 AM
+        12 18-AUG-26 09.58.22.000000 AM
+        13 17-AUG-26 09.58.22.000000 AM
+
+SQL> delete test2 where id=13;
+
+1 row deleted.
+
+SQL> select * from test2;
+
+        ID DOJ
+---------- ---------------------------------------------------------------------------
+        11 19-AUG-26 09.48.22.000000 AM
+        12 18-AUG-26 09.58.22.000000 AM
+
+SQL> commit;
+
+Commit complete.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from test2;
+
+        ID DOJ
+---------- ---------------------------------------------------------------------------
+        11 19-AUG-26 09.48.22.000000 AM
+        12 18-AUG-26 09.58.22.000000 AM
+
+SQL>
