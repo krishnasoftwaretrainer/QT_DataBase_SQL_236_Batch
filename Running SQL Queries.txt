@@ -1232,3 +1232,332 @@ SQL> select * from test2;
         12 18-AUG-26 09.58.22.000000 AM
 
 SQL>
+-------------------------------------
+
+SQL*Plus: Release 11.2.0.2.0 Production on Thu Aug 20 09:46:34 2026
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect qt236;
+Enter password:
+Connected.
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+STU1                           TABLE
+STU2                           TABLE
+SUPPLIER                       TABLE
+TEST1                          TABLE
+TEST2                          TABLE
+
+SQL> select * from stu1;
+
+      HTNO SNAME                DOB       G       SUB1       SUB2       SUB3
+---------- -------------------- --------- - ---------- ---------- ----------
+       101 Krishna              10-FEB-99 M         99         88         77
+       102 Krishna              10-FEB-99 M         99         88         77
+       103 fehf$%$%534DGDFG     22-MAR-97 M         99         89         79
+       104 12345                22-DEC-97 M         99         88         77
+
+SQL> create table drop1 as select * from stu1;
+
+Table created.
+
+SQL> select * from drop1;
+
+      HTNO SNAME                DOB       G       SUB1       SUB2       SUB3
+---------- -------------------- --------- - ---------- ---------- ----------
+       101 Krishna              10-FEB-99 M         99         88         77
+       102 Krishna              10-FEB-99 M         99         88         77
+       103 fehf$%$%534DGDFG     22-MAR-97 M         99         89         79
+       104 12345                22-DEC-97 M         99         88         77
+
+SQL> create table drop2 as select htno,sname,dob from stu1 where htno>=102;
+
+Table created.
+
+SQL> select * from drop2;
+
+      HTNO SNAME                DOB
+---------- -------------------- ---------
+       102 Krishna              10-FEB-99
+       103 fehf$%$%534DGDFG     22-MAR-97
+       104 12345                22-DEC-97
+
+SQL> create table drop3 as select htno,sname,sub1 from stu1;
+
+Table created.
+
+SQL> rename table drop2 to truncate;
+rename table drop2 to truncate
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> rename drop2 to truncate;
+
+Table renamed.
+
+SQL> select * from drop2;
+select * from drop2
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> rename drop3 to delete;
+rename drop3 to delete
+                *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> rename drop3 to delete1;
+
+Table renamed.
+
+SQL> select * from drop1;
+
+      HTNO SNAME                DOB       G       SUB1       SUB2       SUB3
+---------- -------------------- --------- - ---------- ---------- ----------
+       101 Krishna              10-FEB-99 M         99         88         77
+       102 Krishna              10-FEB-99 M         99         88         77
+       103 fehf$%$%534DGDFG     22-MAR-97 M         99         89         79
+       104 12345                22-DEC-97 M         99         88         77
+
+SQL> select * from truncate;
+
+      HTNO SNAME                DOB
+---------- -------------------- ---------
+       102 Krishna              10-FEB-99
+       103 fehf$%$%534DGDFG     22-MAR-97
+       104 12345                22-DEC-97
+
+SQL> select * from delete1;
+
+      HTNO SNAME                      SUB1
+---------- -------------------- ----------
+       101 Krishna                      99
+       102 Krishna                      99
+       103 fehf$%$%534DGDFG             99
+       104 12345                        99
+
+SQL> commit;
+
+Commit complete.
+
+SQL> delete delete1 where htno=104;
+
+1 row deleted.
+
+SQL> select * from delete1;
+
+      HTNO SNAME                      SUB1
+---------- -------------------- ----------
+       101 Krishna                      99
+       102 Krishna                      99
+       103 fehf$%$%534DGDFG             99
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from delete1;
+
+      HTNO SNAME                      SUB1
+---------- -------------------- ----------
+       101 Krishna                      99
+       102 Krishna                      99
+       103 fehf$%$%534DGDFG             99
+       104 12345                        99
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from delete1;
+
+      HTNO SNAME                      SUB1
+---------- -------------------- ----------
+       101 Krishna                      99
+       102 Krishna                      99
+       103 fehf$%$%534DGDFG             99
+       104 12345                        99
+
+SQL> delete delete1;
+
+4 rows deleted.
+
+SQL> select * from delete1;
+
+no rows selected
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from delete1;
+
+      HTNO SNAME                      SUB1
+---------- -------------------- ----------
+       101 Krishna                      99
+       102 Krishna                      99
+       103 fehf$%$%534DGDFG             99
+       104 12345                        99
+
+SQL> delete delete1;
+
+4 rows deleted.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from delete1;
+
+no rows selected
+
+SQL> desc delete1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ HTNO                                               NUMBER(3)
+ SNAME                                              VARCHAR2(20)
+ SUB1                                               NUMBER(3)
+
+SQL> select * from truncate;
+
+      HTNO SNAME                DOB
+---------- -------------------- ---------
+       102 Krishna              10-FEB-99
+       103 fehf$%$%534DGDFG     22-MAR-97
+       104 12345                22-DEC-97
+
+SQL> commit;
+
+Commit complete.
+
+SQL> truncate table truncate;
+
+Table truncated.
+
+SQL> select * from truncate;
+
+no rows selected
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from truncate;
+
+no rows selected
+
+SQL> desc truncate;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ HTNO                                               NUMBER(3)
+ SNAME                                              VARCHAR2(20)
+ DOB                                                DATE
+
+SQL> select * from drop1;
+
+      HTNO SNAME                DOB       G       SUB1       SUB2       SUB3
+---------- -------------------- --------- - ---------- ---------- ----------
+       101 Krishna              10-FEB-99 M         99         88         77
+       102 Krishna              10-FEB-99 M         99         88         77
+       103 fehf$%$%534DGDFG     22-MAR-97 M         99         89         79
+       104 12345                22-DEC-97 M         99         88         77
+
+SQL> commit;
+
+Commit complete.
+
+SQL> drop table drop1;
+
+Table dropped.
+
+SQL> select * from drop1;
+select * from drop1
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from drop1;
+select * from drop1
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> desc drop1;
+ERROR:
+ORA-04043: object drop1 does not exist
+
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DELETE1                        TABLE
+STU1                           TABLE
+STU2                           TABLE
+SUPPLIER                       TABLE
+TEST1                          TABLE
+TEST2                          TABLE
+TRUNCATE                       TABLE
+
+7 rows selected.
+
+SQL> drop table truncate;
+
+Table dropped.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DELETE1                        TABLE
+STU1                           TABLE
+STU2                           TABLE
+SUPPLIER                       TABLE
+TEST1                          TABLE
+TEST2                          TABLE
+
+6 rows selected.
+
+SQL> desc truncate;
+ERROR:
+ORA-04043: object truncate does not exist
+
+
+SQL> drop table delete1;
+
+Table dropped.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+STU1                           TABLE
+STU2                           TABLE
+SUPPLIER                       TABLE
+TEST1                          TABLE
+TEST2                          TABLE
+
+SQL> desc delete1;
+ERROR:
+ORA-04043: object delete1 does not exist
+
+
+SQL>
