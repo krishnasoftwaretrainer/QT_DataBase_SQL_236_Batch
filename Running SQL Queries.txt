@@ -1561,3 +1561,192 @@ ORA-04043: object delete1 does not exist
 
 
 SQL>
+==================================
+
+SQL*Plus: Release 11.2.0.2.0 Production on Fri Aug 21 09:35:03 2026
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect qt236
+Enter password:
+Connected.
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+STU1                           TABLE
+STU2                           TABLE
+SUPPLIER                       TABLE
+TEST1                          TABLE
+TEST2                          TABLE
+
+SQL> select * from stu2;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       102 Ramesh                    12346         99
+       106 Ramesh                                  98
+
+SQL> create table save as select * from stu2;
+
+Table created.
+
+SQL> select * from save;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       102 Ramesh                    12346         99
+       106 Ramesh                                  98
+
+SQL> commit;
+
+Commit complete.
+
+SQL> update table save set mobile=1111 where sid=106;
+update table save set mobile=1111 where sid=106
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> update save set mobile=1111 where sid=106;
+
+1 row updated.
+
+SQL> select * from save;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       102 Ramesh                    12346         99
+       106 Ramesh                     1111         98
+
+SQL> insert into save(sid,sname) values(108,'Kumar');
+
+1 row created.
+
+SQL> select * from save;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       102 Ramesh                    12346         99
+       106 Ramesh                     1111         98
+       108 Kumar
+
+SQL> delete save where sid=102;
+
+1 row deleted.
+
+SQL> select * from save;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       106 Ramesh                     1111         98
+       108 Kumar
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from save;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       102 Ramesh                    12346         99
+       106 Ramesh                                  98
+
+SQL> commit;
+
+Commit complete.
+
+SQL> update save set mobile=1111 where sid=106;
+
+1 row updated.
+
+SQL> savepoint s1;
+
+Savepoint created.
+
+SQL> insert into save(sid,sname) values(108,'Kumar');
+
+1 row created.
+
+SQL> savepoint s2;
+
+Savepoint created.
+
+SQL> delete save where sid=102;
+
+1 row deleted.
+
+SQL> savepoint s3;
+
+Savepoint created.
+
+SQL> select * from save;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       106 Ramesh                     1111         98
+       108 Kumar
+
+SQL> rollback to s3;
+
+Rollback complete.
+
+SQL> select * from save;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       106 Ramesh                     1111         98
+       108 Kumar
+
+SQL> rollback to s2;
+
+Rollback complete.
+
+SQL> select * from save;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       102 Ramesh                    12346         99
+       106 Ramesh                     1111         98
+       108 Kumar
+
+SQL> rollback to s1;
+
+Rollback complete.
+
+SQL> select * from save;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       102 Ramesh                    12346         99
+       106 Ramesh                     1111         98
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from save;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       102 Ramesh                    12346         99
+       106 Ramesh                                  98
+
+SQL> commit;
+
+Commit complete.
+
+SQL>
