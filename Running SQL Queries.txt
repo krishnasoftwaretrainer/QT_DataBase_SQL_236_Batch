@@ -1750,3 +1750,1013 @@ SQL> commit;
 Commit complete.
 
 SQL>
+
+==========================================
+SQL*Plus: Release 11.2.0.2.0 Production on Sat Aug 22 09:36:49 2026
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect qt236;
+Enter password:
+Connected.
+SQL> select * from dual;
+
+D
+-
+X
+
+SQL> select * from stu2;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       102 Ramesh                    12346         99
+       106 Ramesh                                  98
+
+SQL> select 3+2 from dual;
+
+       3+2
+----------
+         5
+
+SQL> select 3-2 from dual;
+
+       3-2
+----------
+         1
+
+SQL> select 3-2-1 from dual;
+
+     3-2-1
+----------
+         0
+
+SQL> select 3+2 as Addition from dual;
+
+  ADDITION
+----------
+         5
+
+SQL> select 3-2-1 as Sub from dual;
+
+       SUB
+----------
+         0
+
+SQL> select 3-2-1 as Sub from stu2;
+
+       SUB
+----------
+         0
+         0
+         0
+
+SQL> select 3+2 as Addition from stu2;
+
+  ADDITION
+----------
+         5
+         5
+         5
+
+SQL> select 3+2 as Addition from stu1;
+
+  ADDITION
+----------
+         5
+         5
+         5
+         5
+
+SQL> select 3*2 as Mul from dual;
+
+       MUL
+----------
+         6
+
+SQL> select 3*2*5*3 as Mul from dual;
+
+       MUL
+----------
+        90
+
+SQL> select 3+2-5*3 as Mul from dual;
+
+       MUL
+----------
+       -10
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+CUSTOMERS                      TABLE
+SAVE                           TABLE
+STU1                           TABLE
+STU2                           TABLE
+SUPPLIER                       TABLE
+TEST1                          TABLE
+TEST2                          TABLE
+
+7 rows selected.
+
+SQL> select * from customers;
+
+        ID NAME                                                      AGE
+---------- -------------------------------------------------- ----------
+ADDRESS                                                SALARY
+-------------------------------------------------- ----------
+         1 Ramesh                                                     32
+Ahmedabad                                                2000
+
+         2 Khilan                                                     25
+Delhi                                                    1500
+
+         3 kaushik                                                    23
+Kota                                                     2000
+
+
+        ID NAME                                                      AGE
+---------- -------------------------------------------------- ----------
+ADDRESS                                                SALARY
+-------------------------------------------------- ----------
+         4 Anand                                                      25
+Mumbai                                                   6500
+
+         5 Hardik                                                     27
+Bhopal                                                   8500
+
+         6 Komal                                                      22
+MP                                                       4500
+
+
+        ID NAME                                                      AGE
+---------- -------------------------------------------------- ----------
+ADDRESS                                                SALARY
+-------------------------------------------------- ----------
+         7 Muffy                                                      24
+Indore                                                  10000
+
+
+7 rows selected.
+
+SQL> set linesize 200;
+SQL> select * from customers;
+
+        ID NAME                                                      AGE ADDRESS             SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad             2000
+         2 Khilan                                                     25 Delhi                 1500
+         3 kaushik                                                    23 Kota                  2000
+         4 Anand                                                      25 Mumbai                6500
+         5 Hardik                                                     27 Bhopal                8500
+         6 Komal                                                      22 MP                    4500
+         7 Muffy                                                      24 Indore               10000
+
+7 rows selected.
+
+SQL> set pagesize 100;
+SQL> select * from customers;
+
+        ID NAME                                                      AGE ADDRESS                                    SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                    2000
+         2 Khilan                                                     25 Delhi                                        1500
+         3 kaushik                                                    23 Kota                                         2000
+         4 Anand                                                      25 Mumbai                                       6500
+         5 Hardik                                                     27 Bhopal                                       8500
+         6 Komal                                                      22 MP                                           4500
+         7 Muffy                                                      24 Indore                                      10000
+
+7 rows selected.
+
+SQL> set pagesize 18;
+SQL> select * from customers;
+
+        ID NAME                                                      AGE ADDRESS                                    SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                    2000
+         2 Khilan                                                     25 Delhi                                        1500
+         3 kaushik                                                    23 Kota                                         2000
+         4 Anand                                                      25 Mumbai                                       6500
+         5 Hardik                                                     27 Bhopal                                       8500
+         6 Komal                                                      22 MP                                           4500
+         7 Muffy                                                      24 Indore                                      10000
+
+7 rows selected.
+
+SQL> select * from customers whare salary<5000;
+select * from customers whare salary<5000
+                              *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from customers where salary<5000;
+
+        ID NAME                                                      AGE ADDRESS                                            SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                            2000
+         2 Khilan                                                     25 Delhi                                                1500
+         3 kaushik                                                    23 Kota                                                 2000
+         6 Komal                                                      22 MP                                                   4500
+
+SQL> set linesize 120;
+SQL> select * from customers where salary<5000;
+
+        ID NAME                                                      AGE
+---------- -------------------------------------------------- ----------
+ADDRESS                                                SALARY
+-------------------------------------------------- ----------
+         1 Ramesh                                                     32
+Ahmedabad                                                2000
+
+         2 Khilan                                                     25
+Delhi                                                    1500
+
+         3 kaushik                                                    23
+Kota                                                     2000
+
+         6 Komal                                                      22
+MP                                                       4500
+
+
+SQL> set linesize 150;
+SQL> select * from customers where salary<5000;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         3 kaushik                                                    23 Kota                                                     2000
+         6 Komal                                                      22 MP                                                       4500
+
+SQL> select * from customers where salary<6500;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         3 kaushik                                                    23 Kota                                                     2000
+         6 Komal                                                      22 MP                                                       4500
+
+SQL> select * from customers where salary<=6500;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         3 kaushik                                                    23 Kota                                                     2000
+         4 Anand                                                      25 Mumbai                                                   6500
+         6 Komal                                                      22 MP                                                       4500
+
+SQL> select * from customers where salary>6500;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         5 Hardik                                                     27 Bhopal                                                   8500
+         7 Muffy                                                      24 Indore                                                  10000
+
+SQL> select * from customers where salary>=6500;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         7 Muffy                                                      24 Indore                                                  10000
+
+SQL> select * from customers where salary==6500;
+select * from customers where salary==6500
+                                     *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select * from customers where salary=6500;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         4 Anand                                                      25 Mumbai                                                   6500
+
+SQL> select * from customers where salary=2000;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         3 kaushik                                                    23 Kota                                                     2000
+
+SQL> select * from customers where salary!=2000;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         2 Khilan                                                     25 Delhi                                                    1500
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         6 Komal                                                      22 MP                                                       4500
+         7 Muffy                                                      24 Indore                                                  10000
+
+SQL> select * from customers where salary<>2000;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         2 Khilan                                                     25 Delhi                                                    1500
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         6 Komal                                                      22 MP                                                       4500
+         7 Muffy                                                      24 Indore                                                  10000
+
+SQL> select * from customers;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         3 kaushik                                                    23 Kota                                                     2000
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         6 Komal                                                      22 MP                                                       4500
+         7 Muffy                                                      24 Indore                                                  10000
+
+7 rows selected.
+
+SQL> select * from customers where salary>=2000 and salary<=6500;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         3 kaushik                                                    23 Kota                                                     2000
+         4 Anand                                                      25 Mumbai                                                   6500
+         6 Komal                                                      22 MP                                                       4500
+
+SQL> select * from customers where salary>=2000 or salary<=6500;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         3 kaushik                                                    23 Kota                                                     2000
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         6 Komal                                                      22 MP                                                       4500
+         7 Muffy                                                      24 Indore                                                  10000
+
+7 rows selected.
+
+SQL> select * from customers where salary is not null;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         3 kaushik                                                    23 Kota                                                     2000
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         6 Komal                                                      22 MP                                                       4500
+         7 Muffy                                                      24 Indore                                                  10000
+
+7 rows selected.
+
+SQL> select * from stu2;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       102 Ramesh                    12346         99
+       106 Ramesh                                  98
+
+SQL> select * from stu2 where mobile is not null;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       101 Krishna                   12345         99
+       102 Ramesh                    12346         99
+
+SQL> select * from stu2 where mobile is null;
+
+       SID SNAME                    MOBILE      MARKS
+---------- -------------------- ---------- ----------
+       106 Ramesh                                  98
+
+SQL> select * from customers;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         3 kaushik                                                    23 Kota                                                     2000
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         6 Komal                                                      22 MP                                                       4500
+         7 Muffy                                                      24 Indore                                                  10000
+
+7 rows selected.
+
+SQL> select * from customers where like 'A%';
+select * from customers where like 'A%'
+                              *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select * from customers where name like 'A%';
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         4 Anand                                                      25 Mumbai                                                   6500
+
+SQL> SELECT * from customers WhErE name like 'A%';
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         4 Anand                                                      25 Mumbai                                                   6500
+
+SQL> SELECT * from customers WhErE name like 'a%';
+
+no rows selected
+
+SQL> SELECT * from customers WhErE name like '%a';
+
+no rows selected
+
+SQL> SELECT * from customers WhErE name like '%k';
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         3 kaushik                                                    23 Kota                                                     2000
+         5 Hardik                                                     27 Bhopal                                                   8500
+
+SQL> SELECT * from customers WhErE name like '%K';
+
+no rows selected
+
+SQL> SELECT * from customers WhErE name like '%a%';
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         3 kaushik                                                    23 Kota                                                     2000
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         6 Komal                                                      22 MP                                                       4500
+
+6 rows selected.
+
+SQL> SELECT * from customers WhErE name like '%A%';
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         4 Anand                                                      25 Mumbai                                                   6500
+
+SQL> SELECT * from customers WhErE salary like '00%'
+  2  ;
+
+no rows selected
+
+SQL> SELECT * from customers WhErE salary like '%00';
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         3 kaushik                                                    23 Kota                                                     2000
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         6 Komal                                                      22 MP                                                       4500
+         7 Muffy                                                      24 Indore                                                  10000
+
+7 rows selected.
+
+SQL> SELECT * from customers WhErE salary like '%000';
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         3 kaushik                                                    23 Kota                                                     2000
+         7 Muffy                                                      24 Indore                                                  10000
+
+SQL> SELECT * from customers WhErE salary like '%0000';
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         7 Muffy                                                      24 Indore                                                  10000
+
+SQL> SELECT * from customers WhErE salary like '%00000';
+
+no rows selected
+
+SQL> SELECT * from customers WhErE salary like '%5%';
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         2 Khilan                                                     25 Delhi                                                    1500
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         6 Komal                                                      22 MP                                                       4500
+
+SQL> SELECT * from customers WhErE salary like '5%';
+
+no rows selected
+
+SQL> SELECT * from customers WhErE salary like '%5';
+
+no rows selected
+
+SQL> SELECT * from customers WhErE salary like '%5%';
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         2 Khilan                                                     25 Delhi                                                    1500
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         6 Komal                                                      22 MP                                                       4500
+
+SQL> SELECT * FROM CUSTOMERS WHERE AGE IN (25, 27);
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         2 Khilan                                                     25 Delhi                                                    1500
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+
+SQL> SELECT * FROM CUSTOMERS WHERE AGE IN (25, 32);
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         4 Anand                                                      25 Mumbai                                                   6500
+
+SQL> SELECT * FROM CUSTOMERS;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         3 kaushik                                                    23 Kota                                                     2000
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         6 Komal                                                      22 MP                                                       4500
+         7 Muffy                                                      24 Indore                                                  10000
+
+7 rows selected.
+
+SQL> SELECT * FROM CUSTOMERS WHERE AGE BETWEEN 25 AND 32;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+
+SQL> SELECT AGE FROM CUSTOMERS WHERE SALARY > 6500;
+
+       AGE
+----------
+        27
+        24
+
+SQL> SELECT * FROM CUSTOMERS;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         3 kaushik                                                    23 Kota                                                     2000
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         6 Komal                                                      22 MP                                                       4500
+         7 Muffy                                                      24 Indore                                                  10000
+
+7 rows selected.
+
+SQL> SELECT AGE FROM CUSTOMERS WHERE EXISTS (SELECT AGE FROM CUSTOMERS WHERE SALARY > 6500);
+
+       AGE
+----------
+        32
+        25
+        23
+        25
+        27
+        22
+        24
+
+7 rows selected.
+
+SQL> SELECT AGE FROM CUSTOMERS WHERE EXISTS (SELECT AGE FROM CUSTOMERS WHERE SALARY > 8500);
+
+       AGE
+----------
+        32
+        25
+        23
+        25
+        27
+        22
+        24
+
+7 rows selected.
+
+SQL> SELECT AGE FROM CUSTOMERS WHERE EXISTS (SELECT AGE FROM CUSTOMERS WHERE SALARY > 1000);
+
+       AGE
+----------
+        32
+        25
+        23
+        25
+        27
+        22
+        24
+
+7 rows selected.
+
+SQL> SELECT id,name,AGE FROM CUSTOMERS WHERE EXISTS (SELECT AGE FROM CUSTOMERS WHERE SALARY > 1000);
+
+        ID NAME                                                      AGE
+---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32
+         2 Khilan                                                     25
+         3 kaushik                                                    23
+         4 Anand                                                      25
+         5 Hardik                                                     27
+         6 Komal                                                      22
+         7 Muffy                                                      24
+
+7 rows selected.
+
+SQL> SELECT id,name,AGE FROM CUSTOMERS WHERE EXISTS (SELECT AGE FROM CUSTOMERS WHERE SALARY > 10000);
+
+no rows selected
+
+SQL> SELECT AGE FROM CUSTOMERS WHERE SALARY > 10000;
+
+no rows selected
+
+SQL> SELECT * FROM CUSTOMERS WHERE AGE > ALL (SELECT AGE FROM CUSTOMERS WHERE SALARY > 6500);
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+
+SQL> SELECT * FROM CUSTOMERS;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         3 kaushik                                                    23 Kota                                                     2000
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         6 Komal                                                      22 MP                                                       4500
+         7 Muffy                                                      24 Indore                                                  10000
+
+7 rows selected.
+
+SQL> SELECT AGE FROM CUSTOMERS WHERE SALARY > 6500;
+
+       AGE
+----------
+        27
+        24
+
+SQL> SELECT * FROM CUSTOMERS WHERE AGE > Any (SELECT AGE FROM CUSTOMERS WHERE SALARY > 6500);
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         5 Hardik                                                     27 Bhopal                                                   8500
+         2 Khilan                                                     25 Delhi                                                    1500
+         4 Anand                                                      25 Mumbai                                                   6500
+
+SQL> SELECT * FROM CUSTOMERS where name='Khilan;
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> SELECT * FROM CUSTOMERS where name='Khilan';
+
+        ID NAME                                                      AGE ADDRESS                             SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         2 Khilan                                                     25 Delhi                                 1500
+
+SQL> SELECT * FROM CUSTOMERS;
+
+        ID NAME                                                      AGE ADDRESS                             SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                             2000
+         2 Khilan                                                     25 Delhi                                 1500
+         3 kaushik                                                    23 Kota                                  2000
+         4 Anand                                                      25 Mumbai                                6500
+         5 Hardik                                                     27 Bhopal                                8500
+         6 Komal                                                      22 MP                                    4500
+         7 Muffy                                                      24 Indore                               10000
+
+7 rows selected.
+
+SQL> SELECT id,name FROM CUSTOMERS;
+
+        ID NAME
+---------- --------------------------------------------------
+         1 Ramesh
+         2 Khilan
+         3 kaushik
+         4 Anand
+         5 Hardik
+         6 Komal
+         7 Muffy
+
+7 rows selected.
+
+SQL> SELECT id,name FROM CUSTOMERS where age>=25;
+
+        ID NAME
+---------- --------------------------------------------------
+         1 Ramesh
+         2 Khilan
+         4 Anand
+         5 Hardik
+
+SQL> SELECT id,name FROM CUSTOMERS where age>=25 and salary>=6000;
+
+        ID NAME
+---------- --------------------------------------------------
+         4 Anand
+         5 Hardik
+
+SQL> SELECT id,name,age,salary FROM CUSTOMERS where age>=25 and salary>=6000;
+
+        ID NAME                                                      AGE     SALARY
+---------- -------------------------------------------------- ---------- ----------
+         4 Anand                                                      25       6500
+         5 Hardik                                                     27       8500
+
+SQL> SELECT id,name,age,salary FROM CUSTOMERS where age>25 and salary>=6000;
+
+        ID NAME                                                      AGE     SALARY
+---------- -------------------------------------------------- ---------- ----------
+         5 Hardik                                                     27       8500
+
+SQL> SELECT * FROM CUSTOMERS;
+
+        ID NAME                                                      AGE ADDRESS                             SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                             2000
+         2 Khilan                                                     25 Delhi                                 1500
+         3 kaushik                                                    23 Kota                                  2000
+         4 Anand                                                      25 Mumbai                                6500
+         5 Hardik                                                     27 Bhopal                                8500
+         6 Komal                                                      22 MP                                    4500
+         7 Muffy                                                      24 Indore                               10000
+
+7 rows selected.
+
+SQL> SELECT * FROM CUSTOMERS order by name;
+
+        ID NAME                                                      AGE ADDRESS                                            SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         4 Anand                                                      25 Mumbai                                               6500
+         5 Hardik                                                     27 Bhopal                                               8500
+         2 Khilan                                                     25 Delhi                                                1500
+         6 Komal                                                      22 MP                                                   4500
+         7 Muffy                                                      24 Indore                                              10000
+         1 Ramesh                                                     32 Ahmedabad                                            2000
+         3 kaushik                                                    23 Kota                                                 2000
+
+7 rows selected.
+
+SQL> SELECT * FROM CUSTOMERS where name='K';
+
+no rows selected
+
+SQL> SELECT * FROM CUSTOMERS where name like 'K%;
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> SELECT * FROM CUSTOMERS where name like 'K%';
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         2 Khilan                                                     25 Delhi                                                    1500
+         6 Komal                                                      22 MP                                                       4500
+
+SQL> SELECT * FROM CUSTOMERS where name like 'k%';
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         3 kaushik                                                    23 Kota                                                     2000
+
+SQL> SELECT * FROM CUSTOMERS order by name;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         2 Khilan                                                     25 Delhi                                                    1500
+         6 Komal                                                      22 MP                                                       4500
+         7 Muffy                                                      24 Indore                                                  10000
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         3 kaushik                                                    23 Kota                                                     2000
+
+7 rows selected.
+
+SQL> SELECT * FROM CUSTOMERS order by name asc;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         2 Khilan                                                     25 Delhi                                                    1500
+         6 Komal                                                      22 MP                                                       4500
+         7 Muffy                                                      24 Indore                                                  10000
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         3 kaushik                                                    23 Kota                                                     2000
+
+7 rows selected.
+
+SQL> SELECT * FROM CUSTOMERS order by name desc;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         3 kaushik                                                    23 Kota                                                     2000
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         7 Muffy                                                      24 Indore                                                  10000
+         6 Komal                                                      22 MP                                                       4500
+         2 Khilan                                                     25 Delhi                                                    1500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         4 Anand                                                      25 Mumbai                                                   6500
+
+7 rows selected.
+
+SQL> SELECT * FROM CUSTOMERS order by address desc;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         4 Anand                                                      25 Mumbai                                                   6500
+         6 Komal                                                      22 MP                                                       4500
+         3 kaushik                                                    23 Kota                                                     2000
+         7 Muffy                                                      24 Indore                                                  10000
+         2 Khilan                                                     25 Delhi                                                    1500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+
+7 rows selected.
+
+SQL> SELECT * FROM CUSTOMERS order by address;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         5 Hardik                                                     27 Bhopal                                                   8500
+         2 Khilan                                                     25 Delhi                                                    1500
+         7 Muffy                                                      24 Indore                                                  10000
+         3 kaushik                                                    23 Kota                                                     2000
+         6 Komal                                                      22 MP                                                       4500
+         4 Anand                                                      25 Mumbai                                                   6500
+
+7 rows selected.
+
+SQL> SELECT * FROM CUSTOMERS order by address asc;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         5 Hardik                                                     27 Bhopal                                                   8500
+         2 Khilan                                                     25 Delhi                                                    1500
+         7 Muffy                                                      24 Indore                                                  10000
+         3 kaushik                                                    23 Kota                                                     2000
+         6 Komal                                                      22 MP                                                       4500
+         4 Anand                                                      25 Mumbai                                                   6500
+
+7 rows selected.
+
+SQL> SELECT * FROM CUSTOMERS WHERE AGE > Any (SELECT AGE FROM CUSTOMERS WHERE SALARY > 6500);
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         5 Hardik                                                     27 Bhopal                                                   8500
+         2 Khilan                                                     25 Delhi                                                    1500
+         4 Anand                                                      25 Mumbai                                                   6500
+
+SQL> SELECT * FROM CUSTOMERS WHERE AGE > Any (SELECT AGE FROM CUSTOMERS WHERE SALARY > 6500) order by name asc;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         2 Khilan                                                     25 Delhi                                                    1500
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+
+SQL> SELECT * FROM CUSTOMERS WHERE AGE > Any (SELECT AGE FROM CUSTOMERS WHERE SALARY > 6500) order by id asc;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         2 Khilan                                                     25 Delhi                                                    1500
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+
+SQL> SELECT * FROM CUSTOMERS WHERE AGE > Any (SELECT AGE FROM CUSTOMERS WHERE SALARY > 6500) order by age asc;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         2 Khilan                                                     25 Delhi                                                    1500
+         4 Anand                                                      25 Mumbai                                                   6500
+         5 Hardik                                                     27 Bhopal                                                   8500
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+
+SQL> SELECT * FROM CUSTOMERS WHERE AGE > Any (SELECT AGE FROM CUSTOMERS WHERE SALARY > 6500) order by age desc;
+
+        ID NAME                                                      AGE ADDRESS                                                SALARY
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+         1 Ramesh                                                     32 Ahmedabad                                                2000
+         5 Hardik                                                     27 Bhopal                                                   8500
+         2 Khilan                                                     25 Delhi                                                    1500
+         4 Anand                                                      25 Mumbai                                                   6500
+
+SQL> create table cust1 as select id,name,age from customers check age>=25;
+create table cust1 as select id,name,age from customers check age>=25
+                                                        *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> create table cust1 as select id,name,age from customers check (age>=25);
+create table cust1 as select id,name,age from customers check (age>=25)
+                                                        *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> create table cust1(id number(3),name varchar2(10),age number(2) check (age>=25));
+
+Table created.
+
+SQL> desc cust1;
+ Name                                                                                Null?    Type
+ ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
+ ID                                                                                           NUMBER(3)
+ NAME                                                                                         VARCHAR2(10)
+ AGE                                                                                          NUMBER(2)
+
+SQL> insert into cust1(1,'Krishna',33);
+insert into cust1(1,'Krishna',33)
+                  *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into cust1 values(1,'Krishna',33);
+
+1 row created.
+
+SQL> insert into cust1 values(2,'Krishna',23);
+insert into cust1 values(2,'Krishna',23)
+*
+ERROR at line 1:
+ORA-02290: check constraint (QT236.SYS_C007086) violated
+
+
+SQL> create table cust2(id number(3),name varchar2(10),offer number(2) default offer(10));
+create table cust2(id number(3),name varchar2(10),offer number(2) default offer(10))
+                                                                          *
+ERROR at line 1:
+ORA-04044: procedure, function, package, or type is not allowed here
+
+
+SQL> create table cust2(id number(3),name varchar2(10),offer number(2) default offer=10);
+create table cust2(id number(3),name varchar2(10),offer number(2) default offer=10)
+                                                                          *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> create table cust2(id number(3),name varchar2(10),offer number(2) default 10);
+
+Table created.
+
+SQL> insert into cust2(id,name) values(1,'Krishna');
+
+1 row created.
+
+SQL> insert into cust2(id,name) values(2,'Ramesh');
+
+1 row created.
+
+SQL> insert into cust2(id,name) values(3,'Suresh');
+
+1 row created.
+
+SQL> select * from cust2;
+
+        ID NAME            OFFER
+---------- ---------- ----------
+         1 Krishna            10
+         2 Ramesh             10
+         3 Suresh             10
+
+SQL>
